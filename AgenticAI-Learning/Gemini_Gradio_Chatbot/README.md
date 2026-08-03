@@ -1,6 +1,6 @@
 # 🤖 Gemini + Gradio Chatbot
 
-A simple AI chatbot built using **Python**, **Google Gemini API**, and **Gradio**. This project demonstrates how to integrate Google's **Gemini Large Language Model (LLM)** with a web-based chat interface.
+A simple AI chatbot built using **Python**, **Google Gemini API**, and **Gradio**. This project demonstrates how to integrate Google's **Gemini Large Language Model (LLM)** with a user-friendly web interface.
 
 ---
 
@@ -36,7 +36,7 @@ This project is part of my **Agentic AI Learning Journey**, where I am exploring
 
 # 📂 Project Structure
 
-```
+```text
 Gemini_Gradio_Chatbot/
 │
 ├── gemini_gradio_chatbot.py
@@ -44,7 +44,7 @@ Gemini_Gradio_Chatbot/
 ├── .env.example
 ├── .gitignore
 ├── README.md
-└── screenshot.png
+└── chatbot-demo.png
 ```
 
 ---
@@ -103,15 +103,15 @@ Open the URL displayed in the terminal (typically **http://127.0.0.1:7860**) in 
 
 # 📷 Application Screenshot
 
-Replace the placeholder image with your own screenshot after running the application.
+Below is the Gemini Gradio Chatbot running locally. The chatbot accepts user input through a Gradio web interface, sends the prompt to the Google Gemini API, and displays the AI-generated response in real time.
 
-![Gemini Gradio Chatbot](screenshot.png)
+![Gemini Gradio Chatbot Demo](chatbot-demo.png)
 
 ---
 
 # 🔄 Application Workflow
 
-```
+```text
             User
               │
               ▼
@@ -160,7 +160,7 @@ Through this project, I learned:
 - How to create and maintain a chat session using `start_chat()`
 - How to build an interactive chatbot using Gradio
 - How Python communicates with Large Language Models (LLMs)
-- The end-to-end flow of Prompt → Gemini API → AI Response
+- The end-to-end workflow from **User Prompt → Gemini API → AI Response**
 
 ---
 
@@ -168,14 +168,26 @@ Through this project, I learned:
 
 **User**
 
-```
-What is Terraform?
+```text
+Hello
 ```
 
 **Gemini Response**
 
+```text
+Hello! How can I help you today?
 ```
-Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp that allows you to provision and manage infrastructure using declarative configuration files.
+
+**User**
+
+```text
+My name is Amit, who are you?
+```
+
+**Gemini Response**
+
+```text
+Hello Amit! Nice to meet you. I am Gemini, a large language model built by Google. How can I help you today?
 ```
 
 ---
@@ -186,17 +198,17 @@ Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp that al
 
 **DevOps | Cloud | AI | Agentic AI Learner**
 
-**GitHub Profile**
+### GitHub Profile
 
 https://github.com/amitkoundal02
 
-**Repository**
+### Repository
 
 https://github.com/amitkoundal02/agentic-ai-devops
 
-**LinkedIn**
+### LinkedIn
 
-www.linkedin.com/in/amit-koundal-5833ba33a
+https://www.linkedin.com/in/amit-koundal-5833ba33a
 
 ---
 
@@ -205,6 +217,3 @@ www.linkedin.com/in/amit-koundal-5833ba33a
 If you found this project useful, please consider giving it a ⭐ on GitHub.
 
 Feedback, suggestions, and contributions are always welcome.
-
----
-
