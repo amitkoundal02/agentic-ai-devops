@@ -43,7 +43,8 @@ This project is part of my Agentic AI learning journey and focuses on understand
 ```
 Gemini_Gradio_Chatbot/
 │
-├── chatbot.py          # Main chatbot application
+├── chatbot.py          # Compatibility wrapper for the main app
+├── gemini_gradio_chatbot.py  # Main chatbot application
 ├── requirements.txt    # Required Python packages
 ├── README.md           # Project documentation
 ├── .env.example        # Sample environment variables
@@ -93,7 +94,7 @@ GOOGLE_API_KEY=YOUR_API_KEY_HERE
 ### Step 5 : Run the Application
 
 ```bash
-python chatbot.py
+python gemini_gradio_chatbot.py
 ```
 
 Gradio will launch a local web server.
