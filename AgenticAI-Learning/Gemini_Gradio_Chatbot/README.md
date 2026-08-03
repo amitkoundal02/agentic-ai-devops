@@ -1,35 +1,31 @@
 # 🤖 Gemini + Gradio Chatbot
 
-A simple AI chatbot built using **Python**, **Google Gemini API**, and **Gradio**. This project demonstrates how to integrate Google's Gemini Large Language Model (LLM) with a web-based chat interface using Gradio.
+A simple AI chatbot built using **Python**, **Google Gemini API**, and **Gradio**. This project demonstrates how to integrate Google's **Gemini Large Language Model (LLM)** with a web-based chat interface.
 
 ---
 
-## 📌 Project Overview
+# 📖 Project Overview
 
-This chatbot allows users to interact with Google's Gemini model through a simple web interface. It accepts user input, sends it to the Gemini API, and displays the AI-generated response in real time.
+This project demonstrates how to build an AI-powered chatbot by integrating the **Google Gemini API** with **Gradio**.
 
-This project is part of my Agentic AI learning journey and focuses on understanding:
+The chatbot accepts user input through a web interface, sends the prompt to the Gemini model, and displays the AI-generated response in real time.
 
-- Google Gemini API Integration
-- Prompt-based AI interactions
-- Gradio Chat Interface
-- Secure API key management using `.env`
-- Python function-based chatbot development
+This project is part of my **Agentic AI Learning Journey**, where I am exploring how Large Language Models (LLMs) can be integrated into Python applications.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-- Interactive AI chatbot
-- Google Gemini API integration
-- Web-based chat interface using Gradio
-- Secure API key management using environment variables
-- Displays available Gemini models
-- Simple and beginner-friendly Python code
+- 🤖 Google Gemini API Integration
+- 💬 Interactive chatbot using Gradio
+- 🔐 Secure API key management using `.env`
+- 📋 Displays available Gemini models
+- 💡 Maintains conversation context using `start_chat()`
+- 🐍 Simple and beginner-friendly Python code
 
 ---
 
-## 🛠️ Technologies Used
+# 🛠️ Technologies Used
 
 - Python 3.x
 - Google Gemini API
@@ -38,40 +34,40 @@ This project is part of my Agentic AI learning journey and focuses on understand
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
 Gemini_Gradio_Chatbot/
 │
-├── chatbot.py          # Compatibility wrapper for the main app
-├── gemini_gradio_chatbot.py  # Main chatbot application
-├── requirements.txt    # Required Python packages
-├── README.md           # Project documentation
-├── .env.example        # Sample environment variables
-└── screenshot.png      # Chatbot screenshot
+├── gemini_gradio_chatbot.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── README.md
+└── screenshot.png
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### Step 1 : Clone the Repository
+## Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/<your-github-username>/<repository-name>.git
+git clone https://github.com/amitkoundal02/agentic-ai-devops.git
 ```
 
 ---
 
-### Step 2 : Navigate to the Project Folder
+## Step 2: Navigate to the Project Folder
 
 ```bash
-cd Gemini_Gradio_Chatbot
+cd agentic-ai-devops/AgenticAI-Learning/Gemini_Gradio_Chatbot
 ```
 
 ---
 
-### Step 3 : Install Dependencies
+## Step 3: Install Required Packages
 
 ```bash
 pip install -r requirements.txt
@@ -79,19 +75,21 @@ pip install -r requirements.txt
 
 ---
 
-### Step 4 : Configure API Key
+## Step 4: Configure the Gemini API Key
 
-Create a `.env` file in the project directory and add your Gemini API Key.
+Create a `.env` file inside the project directory.
 
+Add your Gemini API Key:
+
+```text
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
 ```
-GOOGLE_API_KEY=YOUR_API_KEY_HERE
-```
 
-> **Note:** Never upload your actual `.env` file to GitHub.
+> **Note:** Never upload your actual `.env` file to GitHub. The repository includes a `.env.example` file as a reference.
 
 ---
 
-### Step 5 : Run the Application
+## Step 5: Run the Application
 
 ```bash
 python gemini_gradio_chatbot.py
@@ -99,104 +97,114 @@ python gemini_gradio_chatbot.py
 
 Gradio will launch a local web server.
 
-Open the URL shown in your terminal (usually http://127.0.0.1:7860) in your browser.
+Open the URL displayed in the terminal (typically **http://127.0.0.1:7860**) in your web browser.
 
 ---
 
-## 📷 Screenshot
+# 📷 Application Screenshot
 
-Below is the chatbot interface.
+Replace the placeholder image with your own screenshot after running the application.
 
-> Replace the image below with your own screenshot after running the application.
-
-```
-screenshot.png
-```
+![Gemini Gradio Chatbot](screenshot.png)
 
 ---
 
-## 📖 How It Works
-
-1. User enters a prompt in the Gradio chat interface.
-2. Python receives the user input.
-3. The message is sent to the Google Gemini API.
-4. Gemini generates a response.
-5. The response is displayed back to the user through Gradio.
+# 🔄 Application Workflow
 
 ```
-User
-   │
-   ▼
-Gradio Interface
-   │
-   ▼
-Python Function
-   │
-   ▼
-Google Gemini API
-   │
-   ▼
-AI Response
-   │
-   ▼
-Gradio Interface
+            User
+              │
+              ▼
+     Gradio Chat Interface
+              │
+              ▼
+        Python Function
+              │
+              ▼
+      Google Gemini API
+              │
+              ▼
+    AI Generated Response
+              │
+              ▼
+     Gradio Chat Interface
 ```
 
 ---
 
-## 📦 Required Python Packages
+# 📦 Required Packages
 
-```
-google-generativeai
-gradio
-python-dotenv
-```
-
-Or simply install using:
+Install all required packages using:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+**requirements.txt**
+
+```text
+google-generativeai
+gradio
+python-dotenv
+```
+
 ---
 
-## 💡 Learning Outcomes
+# 🎯 Learning Outcomes
 
 Through this project, I learned:
 
-- How to use the Google Gemini API
-- How API authentication works
-- How to manage API keys securely
-- How to build a chatbot using Gradio
-- How Python functions connect the UI with AI models
-- Basic prompt-response workflow using Large Language Models (LLMs)
+- How to integrate the Google Gemini API with Python
+- How to securely manage API keys using environment variables
+- How to list available Gemini models
+- How to create and maintain a chat session using `start_chat()`
+- How to build an interactive chatbot using Gradio
+- How Python communicates with Large Language Models (LLMs)
+- The end-to-end flow of Prompt → Gemini API → AI Response
 
 ---
 
-## 🔮 Future Improvements
+# ▶️ Example
 
-Some enhancements planned for future versions include:
+**User**
 
-- Conversation history management
-- Multiple AI model support (Gemini, OpenAI, Claude)
-- DevOps-focused chatbot prompts
-- Terraform and Ansible code generation
-- AWS integration
-- CI/CD automation
-- Better UI customization
+```
+What is Terraform?
+```
 
----
+**Gemini Response**
 
-## 👨‍💻 Author
-
-**Amit Koundal**
-
-DevOps | Cloud | AI | Agentic AI Learner
-
-GitHub: https://github.com/<your-github-username>
-
-LinkedIn: https://linkedin.com/in/<your-linkedin-profile>
+```
+Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp that allows you to provision and manage infrastructure using declarative configuration files.
+```
 
 ---
 
-## ⭐ If you found this project helpful, consider giving it a Star!
+# 👨‍💻 Author
+
+## Amit Koundal
+
+**DevOps | Cloud | AI | Agentic AI Learner**
+
+**GitHub Profile**
+
+https://github.com/amitkoundal02
+
+**Repository**
+
+https://github.com/amitkoundal02/agentic-ai-devops
+
+**LinkedIn**
+
+www.linkedin.com/in/amit-koundal-5833ba33a
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Feedback, suggestions, and contributions are always welcome.
+
+---
+
