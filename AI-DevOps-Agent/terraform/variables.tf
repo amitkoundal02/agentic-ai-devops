@@ -69,7 +69,7 @@ variable "instance_type" {
 
 variable "instance_key" {
   type    = string
-  default = "instance_key"
+  default = "instance_key_mum"
 
 }
 
