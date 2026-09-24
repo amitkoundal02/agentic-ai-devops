@@ -12,6 +12,7 @@ resource "aws_instance" "servers" {
   # Resolve subnet from locals map
   subnet_id = local.subnet_ids[each.value.subnet_key]
 
+
   # Resolve SG from locals map
   vpc_security_group_ids = [local.sg_ids[each.value.sg_key]]
 
@@ -21,6 +22,7 @@ resource "aws_instance" "servers" {
   root_block_device {
     volume_size = var.root_volume_size
     volume_type = var.root_volume_type
+    encrypted   = true
   }
 
   tags = merge(local.common_tags, {
