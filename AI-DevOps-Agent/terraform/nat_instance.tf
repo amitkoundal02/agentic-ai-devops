@@ -16,10 +16,16 @@ resource "aws_instance" "nat_instance" {
   # Give it a public IP (Elastic IP will override this)
   associate_public_ip_address = true
 
+  # Require IMDSv2
+  metadata_options {
+    http_tokens = "required"
+  }
+
   # Root Block Device Variables
   root_block_device {
     volume_size = var.root_volume_size
     volume_type = var.root_volume_type
+    encrypted   = true
   }
 
   # Reference external NAT script
