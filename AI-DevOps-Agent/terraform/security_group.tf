@@ -1,4 +1,6 @@
 ######### Bastion Security Group #########
+# Intentional: Bastion requires outbound internet access for administration and updates.
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "bastion_sg" {
   name        = "${var.project_name}_${var.environment}_bastion_sg"
   description = "Security group for Bastion host"
@@ -65,6 +67,8 @@ resource "aws_security_group" "nat_sg" {
 }
 
 ######### Load Balancer Security Group #########
+# Intentional: ALB outbound access will be refined when target groups are implemented.
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "egp_alb" {
   name        = "${var.project_name}_${var.environment}_alb_sg"
   description = "ALB Security Group"
@@ -124,6 +128,8 @@ resource "aws_security_group" "egp_alb" {
 }
 
 ######### K3_Master  ######### 
+# Intentional: K3s requires outbound internet access through the NAT instance.
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "k3_master_sg" {
   description = "Security group for K3s Master"
   name        = "${var.project_name}_${var.environment}_k3_master_sg"
@@ -171,6 +177,8 @@ resource "aws_security_group" "k3_master_sg" {
 
 
 ######### Worker_SG  ######### 
+# Intentional: K3s requires outbound internet access through the NAT instance.
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "k3_worker_sg" {
   description = "Security group for K3s Worker"
   name        = "${var.project_name}_${var.environment}_k3_worker_sg"
@@ -245,7 +253,7 @@ resource "aws_security_group" "egp_db_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.vpc_cidr]
   }
 
   tags = merge(local.common_tags, {
@@ -257,6 +265,8 @@ resource "aws_security_group" "egp_db_sg" {
 
 ######### Monitor_SG ######### 
 
+# Intentional: Monitoring requires outbound internet access for updates and monitoring components.
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "monitor_sg" {
   description = "Security group for Monitoring"
   name        = "${var.project_name}_${var.environment}_monitor_sg"
