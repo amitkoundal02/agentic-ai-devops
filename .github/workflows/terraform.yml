@@ -56,5 +56,12 @@ jobs:
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
           TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
-        run: terraform plan -out=tfplan    
+        run: terraform plan -out=tfplan  
+      
+      - name: Upload Terraform Plan Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: AI-DevOps-Agent/terraform/tfplan
+          retention-days: 5
 
