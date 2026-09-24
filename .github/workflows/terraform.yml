@@ -49,12 +49,12 @@ jobs:
           scan-ref: 'AI-DevOps-Agent/terraform'
           exit-code: '1'   
         env:
-          TF_VAR_admin_ips: ${{ secrets.ADMIN_IPS }}
+          TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
       
       - name: Terraform Plan
         working-directory: AI-DevOps-Agent/terraform
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
-          TF_VAR_admin_ips: ${{ secrets.ADMIN_IPS }}
+          TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
         run: terraform plan -out=tfplan    
 
