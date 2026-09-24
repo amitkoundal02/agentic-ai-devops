@@ -17,7 +17,7 @@ resource "aws_instance" "servers" {
   vpc_security_group_ids = [local.sg_ids[each.value.sg_key]]
 
   associate_public_ip_address = each.value.public
-  
+
 
   root_block_device {
     volume_size = var.root_volume_size

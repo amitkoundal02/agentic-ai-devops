@@ -99,14 +99,14 @@ variable "instances" {
     sg_key     = string
     name       = string
     public     = bool
-}))
+  }))
   default = {
     bastion = {
       subnet_key = "public_a"
       sg_key     = "bastion_sg"
       name       = "bastion"
       public     = true
-      
+
     }
 
     k3_master = {
@@ -114,35 +114,35 @@ variable "instances" {
       sg_key     = "k3_master_sg"
       name       = "k3_master"
       public     = false
-      
+
     }
     k3_worker = {
       subnet_key = "private_b"
       sg_key     = "k3_worker_sg"
       name       = "k3_worker"
       public     = false
-      
+
     }
     db = {
       subnet_key = "private_a"
       sg_key     = "egp_db_sg"
       name       = "db"
       public     = false
-      
+
     }
     monitoring = {
       subnet_key = "private_b"
       sg_key     = "monitor_sg"
       name       = "monitoring"
       public     = false
-      
+
     }
     alb = {
       subnet_key = "public_b"
       sg_key     = "egp_alb"
       name       = "alb"
       public     = true
-     
+
     }
   }
 
