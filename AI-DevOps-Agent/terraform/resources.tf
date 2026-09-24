@@ -5,6 +5,9 @@ resource "aws_instance" "servers" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
   key_name      = var.instance_key
+  metadata_options {
+    http_tokens = "required"
+  }
 
   # Resolve subnet from locals map
   subnet_id = local.subnet_ids[each.value.subnet_key]
