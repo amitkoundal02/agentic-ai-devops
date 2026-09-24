@@ -101,6 +101,15 @@ jobs:
         working-directory: AI-DevOps-Agent/terraform
         run: terraform show -no-color tfplan > tfplan.txt
 
+      - name: Add Terraform Plan to Job Summary
+        working-directory: AI-DevOps-Agent/terraform
+        run: |
+          echo "## Terraform Plan" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          cat tfplan.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload Terraform Plan Artifact
         uses: actions/upload-artifact@v4
         with:
