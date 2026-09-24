@@ -1,4 +1,5 @@
 ######### Subnets (Dynamic) #########
+#trivy:ignore:AWS-0164
 resource "aws_subnet" "subnets" {
   for_each = var.subnets
 

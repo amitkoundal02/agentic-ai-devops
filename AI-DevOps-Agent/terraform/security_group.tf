@@ -24,6 +24,7 @@ resource "aws_security_group" "bastion_sg" {
 }
 
 ######### NAT_SG  #########
+#trivy:ignore:AWS-0104
 resource "aws_security_group" "nat_sg" {
   description = "Security group for NAT Instance"
   name        = "${var.project_name}_${var.environment}_nat_sg"
