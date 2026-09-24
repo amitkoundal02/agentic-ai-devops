@@ -45,4 +45,7 @@ jobs:
           scan-type: 'config'
           severity: 'HIGH,CRITICAL'
           scan-ref: 'AI-DevOps-Agent/terraform'
-          exit-code: '1'        
+          exit-code: '1'   
+        env:
+          TF_VAR_admin_ips: ${{ secrets.ADMIN_IPS }}
+
