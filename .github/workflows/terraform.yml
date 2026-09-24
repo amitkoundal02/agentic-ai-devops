@@ -1,24 +1,81 @@
-name: Terraform CI
+name: Terraform CI/CD
 
 on:
   push:
     branches:
       - master
+
   pull_request:
+
 permissions:
   contents: read
   id-token: write
 
 jobs:
-  terraform:
+
+  # ==========================================================
+  # JOB 1 - Terraform CI
+  # Runs for Pull Requests and Pushes to master
+  # ==========================================================
+
+  terraform-ci:
+
+    name: Terraform CI
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform initialization
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform init -backend=false
+
+      - name: Terraform Format Check
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform fmt -check
+
+      - name: Terraform Validation Check
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform validate
+
+      - name: Trivy Security Scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          severity: HIGH,CRITICAL
+          scan-ref: AI-DevOps-Agent/terraform
+          exit-code: 1
+        env:
+          TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
+
+
+  # ==========================================================
+  # JOB 2 - Terraform Plan
+  # Runs only for Pushes to master
+  # ==========================================================
+
+  terraform-plan:
+
+    name: Terraform Plan
+
+    if: github.event_name == 'push'
+
+    needs: terraform-ci
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Configure AWS credentials
-        if: github.event_name == 'push'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::560386786501:role/GitHubActions-Terraform-AI-DevOps
@@ -33,31 +90,13 @@ jobs:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
         run: terraform init
 
-      - name: Terraform Format Check
-        working-directory: AI-DevOps-Agent/terraform
-        run: terraform fmt -check
-
-      - name: Terraform Validation Check
-        working-directory: AI-DevOps-Agent/terraform
-        run: terraform validate
-
-      - name: Trivy Security Scan
-        uses: aquasecurity/trivy-action@v0.36.0       
-        with:
-          scan-type: 'config'
-          severity: 'HIGH,CRITICAL'
-          scan-ref: 'AI-DevOps-Agent/terraform'
-          exit-code: '1'   
-        env:
-          TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
-      
       - name: Terraform Plan
         working-directory: AI-DevOps-Agent/terraform
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
           TF_VAR_admin_ips: '["${{ secrets.ADMIN_IPS }}"]'
-        run: terraform plan -out=tfplan  
-      
+        run: terraform plan -out=tfplan
+
       - name: Upload Terraform Plan Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -65,3 +104,54 @@ jobs:
           path: AI-DevOps-Agent/terraform/tfplan
           retention-days: 5
 
+
+  # ==========================================================
+  # JOB 3 - Terraform Apply
+  # Runs only for Pushes to master
+  # Protected by production Environment approval
+  # ==========================================================
+
+  terraform-apply:
+
+    name: Terraform Apply
+
+    if: github.event_name == 'push'
+
+    needs: terraform-plan
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::560386786501:role/GitHubActions-Terraform-AI-DevOps
+          aws-region: ap-south-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Download Terraform Plan Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-plan
+          path: AI-DevOps-Agent/terraform
+
+      - name: Terraform initialization
+        working-directory: AI-DevOps-Agent/terraform
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: AI-DevOps-Agent/terraform
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+        run: terraform apply -auto-approve tfplan
