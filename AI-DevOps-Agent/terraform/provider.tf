@@ -9,12 +9,12 @@ terraform {
   }
 
   #  ######### Details for HCP remote backend #########
-  #backend "remote" {
-  #  organization = "my-tf-learning"
-  #  workspaces {
-  #    name = "terraform-prod"
-  #  }
-  #}
+  backend "remote" {
+    organization = "my-tf-learning"
+    workspaces {
+      name = "terraform-prod"
+    }
+  }
 }
 
 provider "aws" {

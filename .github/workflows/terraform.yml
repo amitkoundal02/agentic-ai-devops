@@ -1,0 +1,48 @@
+name: Terraform CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Configure AWS credentials
+        if: github.event_name == 'push'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::560386786501:role/GitHubActions-Terraform-AI-DevOps
+          aws-region: ap-south-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform initialization
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform init -backend=false
+
+      - name: Terraform Format Check
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform fmt -check
+
+      - name: Terraform Validation Check
+        working-directory: AI-DevOps-Agent/terraform
+        run: terraform validate
+
+      - name: Trivy Security Scan
+        uses: aquasecurity/trivy-action@v0.36.0       
+        with:
+          scan-type: 'config'
+          severity: 'HIGH,CRITICAL'
+          scan-ref: 'AI-DevOps-Agent/terraform'
+          exit-code: '1'        
