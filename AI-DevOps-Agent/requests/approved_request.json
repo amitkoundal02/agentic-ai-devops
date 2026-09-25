@@ -1,0 +1,5 @@
+{
+    "action": "create",
+    "resource": "EC2",
+    "environment": "prod"
+}
